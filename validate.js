@@ -1,7 +1,7 @@
 const form = document.querySelector("form");
 
 const nameInput = document.getElementById("nombre");
-const lastNameInput = document.getElementById("apellido");
+const lastNameInput = document.getElementById("primerapellido");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
@@ -14,22 +14,28 @@ function validateInput(input, regex) {
   const inputGroup = input.closest(".form-group");
   const feedbackEl = inputGroup.querySelector(".invalid-feedback");
   const validFeedbackEl = inputGroup.querySelector(".valid-feedback");
-  const iconEl = inputGroup.querySelector(".form-control-icon");
 
   if (isValid) {
     input.classList.add("is-valid");
     input.classList.remove("is-invalid");
     feedbackEl.textContent = "";
     validFeedbackEl.style.display = "block";
-    iconEl.classList.remove("fa-times-circle");
-    iconEl.classList.add("fa-check-circle", "text-success");
   } else {
     input.classList.add("is-invalid");
     input.classList.remove("is-valid");
     feedbackEl.textContent = "Invalid input";
     validFeedbackEl.style.display = "none";
-    iconEl.classList.remove("fa-check-circle");
-    iconEl.classList.add("fa-times-circle", "text-danger");
+  }
+
+  const invalidInputs = inputGroup.parentNode.querySelectorAll(".is-invalid");
+
+  if (invalidInputs.length === 0) {
+    const successMessage = document.createElement("div");
+    successMessage.classList.add("alert", "alert-success");
+    successMessage.textContent = "All requirements met";
+    const feedbackEl = document.getElementById("feedback");
+    feedbackEl.innerHTML = "";
+    feedbackEl.appendChild(successMessage);
   }
 }
 
