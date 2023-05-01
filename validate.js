@@ -18,22 +18,33 @@ function validateInput(input, regex) {
   if (isValid) {
     input.classList.add("is-valid");
     input.classList.remove("is-invalid");
-    feedbackEl.textContent = "Looks good!";
+    feedbackEl.textContent = "";
     validFeedbackEl.style.display = "block";
   } else {
     input.classList.add("is-invalid");
     input.classList.remove("is-valid");
     feedbackEl.textContent = "Invalid input";
+    if (input === passwordInput) {
+      feedbackEl.textContent = "Must be at least 8 characters, a combination of lowercase, uppercase, numbers and special characters";
+    }
     validFeedbackEl.style.display = "none";
   }
 }
 
-function validateForm(event) {
-  event.preventDefault();
+nameInput.addEventListener("input", function () {
   validateInput(nameInput, nameRegex);
+});
+
+lastNameInput.addEventListener("input", function () {
   validateInput(lastNameInput, nameRegex);
+});
+
+emailInput.addEventListener("input", function () {
   validateInput(emailInput, emailRegex);
+});
+
+passwordInput.addEventListener("input", function () {
   validateInput(passwordInput, passwordRegex);
-}
+});
 
 form.addEventListener("submit", validateForm);
