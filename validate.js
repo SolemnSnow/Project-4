@@ -18,24 +18,13 @@ function validateInput(input, regex) {
   if (isValid) {
     input.classList.add("is-valid");
     input.classList.remove("is-invalid");
-    feedbackEl.textContent = "";
+    feedbackEl.textContent = "Looks good!";
     validFeedbackEl.style.display = "block";
   } else {
     input.classList.add("is-invalid");
     input.classList.remove("is-valid");
     feedbackEl.textContent = "Invalid input";
     validFeedbackEl.style.display = "none";
-  }
-
-  const invalidInputs = inputGroup.parentNode.querySelectorAll(".is-invalid");
-
-  if (invalidInputs.length === 0) {
-    const successMessage = document.createElement("div");
-    successMessage.classList.add("alert", "alert-success");
-    successMessage.textContent = "All requirements met";
-    const feedbackEl = document.getElementById("feedback");
-    feedbackEl.innerHTML = "";
-    feedbackEl.appendChild(successMessage);
   }
 }
 
@@ -45,14 +34,6 @@ function validateForm(event) {
   validateInput(lastNameInput, nameRegex);
   validateInput(emailInput, emailRegex);
   validateInput(passwordInput, passwordRegex);
-
-  const invalidInputs = form.querySelectorAll(".is-invalid");
-  if (invalidInputs.length === 0) {
-    const successMessage = document.createElement("div");
-    successMessage.classList.add("alert", "alert-success");
-    successMessage.textContent = "All requirements met";
-    form.appendChild(successMessage);
-  }
 }
 
 form.addEventListener("submit", validateForm);
